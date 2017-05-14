@@ -10,10 +10,11 @@ Add the bot to your server: [Invite me](https://discordapp.com/oauth2/authorize?
 
 (It is assumed you already have a Discord OAuth application and bot account aswell as [node.js](https://nodejs.org/en/) on version 7.6+ installed)
 
-- Rename `config.example.json` to `config.json`
+- Rename `config.example.json` in the `src/` folder to `config.json`
 - Populate the owners array in config.json with your ID(s)
 - Adjust other config settings to your liking
 - Run `npm install` to install all dependencies
+- (Feel free to ignore any "unmet dependency" warnings)
 - Install ffmpeg - if on Windows, add it to your PATH aswell
 - Start the bot using `node robbot.js`!
 
