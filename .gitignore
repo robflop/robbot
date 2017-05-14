@@ -4,14 +4,12 @@ logs
 npm-debug.log*
 .vscode
 
-# ignore ignore lists
-ignores
+# ignore some settings
+src/config.json
+src/data
 
-# ignore serverconfigs
-serverconf
-
-# ignore some files
-config.json
+# unignore relevant files/folders
+!src/data/sounds
 
 # Runtime data
 pids
