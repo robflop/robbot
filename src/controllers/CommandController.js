@@ -73,6 +73,8 @@ class CommandController {
 
 		const parsedArgs = command.args.length ? await this.parseArguments(args, command, message) : args;
 
+		if (!parsedArgs) return;
+
 		const guildConfigs = ['toggle', 'ignore', 'help'].includes(command.name)
 		? { ignoredLists: this.ignoredLists, disabledCommandLists: this.disabledCommandLists }
 		: null;
@@ -142,6 +144,8 @@ class CommandController {
 
 		for (const [i, arg] of beginning.concat(end).entries()) {
 			const { name, type, defaultVal } = command.args[i];
+			if (!name) throw Error(`No argument name supplied at command: ${command.name}`);
+			if (!type) throw Error(`No argument type supplied at command: ${command.name}`);
 
 			parsedArgs[name] = 'defaultVal' in command.args[i] && !arg ? defaultVal : ArgumentParser.parse(type, message, arg);
 
