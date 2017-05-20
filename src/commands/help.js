@@ -48,17 +48,23 @@ class HelpCommand extends Command {
 
 			return message.channel.send({ embed });
 		}
-
-		const disabledCommandList = disabledCommandLists.has(message.guild.id) ? disabledCommandLists.get(message.guild.id).join(', ') : 'None';
-		const ignoredList = ignoredLists.has(message.guild.id) ? ignoredLists.get(message.guild.id).join(', ') : 'None';
+		const wikiLink = 'https://github.com/robflop/robbot/wiki/Usage';
 
 		let help = '**__Available Commands:__**\n\n';
 		help += `${this.listCommands(commands)}\n\n`;
-		help += `Disabled commands on the ${icb}${message.guild.name}${icb} server: ${icb}${disabledCommandList}${icb}\n\n`;
-		help += `Ignored users on the ${icb}${message.guild.name}${icb} server: ${icb}${ignoredList}${icb}\n\n`;
+
+		if (message.channel.type === 'text') {
+			const disabledCommandList = disabledCommandLists.has(message.guild.id) ? disabledCommandLists.get(message.guild.id).join(', ') : 'None';
+			const ignoredList = ignoredLists.has(message.guild.id) ? ignoredLists.get(message.guild.id).join(', ') : 'None';
+
+			help += `Disabled commands on the ${icb}${message.guild.name}${icb} server: ${icb}${disabledCommandList}${icb}\n\n`;
+			help += `Ignored users on the ${icb}${message.guild.name}${icb} server: ${icb}${ignoredList}${icb}\n\n`;
+		}
+
+		help += `Also refer to ${wikiLink} for extensive Command usage help that explains each argument for every command in detail.`;
 
 		return message.author.send(help, { split: true })
-		.then(msg => message.reply('i\'ve sent you a list with all of my commands!'))
+		.then(msg => msg.channel.type === 'text' ? message.reply('i\'ve sent you a list with all of my commands!') : null)
 		.catch(() => message.reply('i ran into an error DM\'ing you!'));
 	}
 
