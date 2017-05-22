@@ -2,7 +2,7 @@
   "name": "robbot",
   "version": "4.0.0",
   "description": "Discord bot to along with the website megumin.love, built with discord.js",
-  "main": "robbot.js",
+  "main": "./src/robbot",
   "dependencies": {
     "chalk": "^1.1.3",
     "discord.js": "github:hydrabolt/discord.js",
@@ -11,8 +11,12 @@
     "prism-media": "github:hydrabolt/prism-media",
     "snekfetch": "^3.1.6"
   },
-  "devDependencies": {},
-  "scripts": {},
+  "devDependencies": {
+	  "eslint": "^3.19.0"
+  },
+    "scripts": {
+	  "test": "eslint src"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/robflop/robbot.git"
@@ -20,11 +24,9 @@
   "keywords": [
     "megumin.love",
     "discord.js",
-    "robbot",
     "bot",
-    "robflop",
-    "discord",
-    "node.js"
+    "discordapp",
+    "node"
   ],
   "author": "robflop",
   "license": "MIT",
