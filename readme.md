@@ -47,6 +47,8 @@ Licensed under the [MIT License](https://github.com/robflop/robbot/blob/master/L
 
 ## Out-of-the-box Commands
 
+Refer to the [Wiki Usage page](https://github.com/robflop/robbot/wiki/Usage) for more in-depth explanations.
+
 | Command       | Effect                                                                                             |
 |-------------  |----------------------------------------------------------------------------------------------------|
 | help          | Make the bot PM the user a list of commands                                                        |

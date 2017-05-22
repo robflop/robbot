@@ -6,6 +6,7 @@ class IgnoreCommand extends Command {
 			name: 'ignore',
 			description: 'Make robbot ignore a user',
 			guildOnly: true,
+			aliases: ['ig'],
 			perms: {
 				member: ['BAN_MEMBERS', 'KICK_MEMBERS'],
 			},
