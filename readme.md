@@ -1,5 +1,7 @@
 # Robbot
 
+[![Build Status](https://travis-ci.org/robflop/robbot.svg?branch=master)](https://travis-ci.org/robflop/robbot)
+
 A Discord bot to go along with my website, [megumin.love](https://megumin.love).
 
 Written using discord.js, using opusscript, snekfetch, moment and prism-media packages (plus some standard node ones).
