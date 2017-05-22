@@ -35,7 +35,7 @@ class EvalCommand extends Command {
 
 	async run(message, args) {
 		const { token } = message.client;
-		args.asyncFlag === 'async' ? '' : args.code = args.asyncFlag + args.code;
+		args.asyncFlag === 'async' ? '' : args.code = `${args.asyncFlag} ${args.code}`;
 
 		const evaled = {}; // Stores outputs
 		const logs = []; // Stores logs
