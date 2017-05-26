@@ -20,7 +20,7 @@ class ToggleCommand extends Command {
 	}
 
 	async run(message, args, guildConfigs) {
-		const { logger, config, commands, aliases } = message.client;
+		const { logger, commands, aliases } = message.client;
 		const cb = '```', icb = '``';
 
 		if (['help', 'toggle', 'shutdown'].includes(args.targetCommand)) {

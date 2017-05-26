@@ -40,7 +40,7 @@ class PlaySoundCommand extends Command {
 		const soundsList = `\`\`\`${sounds.join(',\n')}\`\`\``;
 		if (!sounds.includes(args.sound)) {
 			return message.reply('you provided an invalid sound name, check your PMs for a full list of sounds!')
-			.then(msg => message.author.send(`Choose one of the following: ${soundsList}`).catch(() => {
+			.then(msg => msg.author.send(`Choose one of the following: ${soundsList}`).catch(() => {
 				message.reply('i ran into an error DM\'ing you!');
 			}));
 		}
