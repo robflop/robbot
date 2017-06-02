@@ -28,6 +28,8 @@ class InfoCommand extends Command {
 		const client = message.client;
 		const embed = new RichEmbed();
 
+		const owners = client.config.owners.map(id => client.users.get(id).tag);
+
 		if (args.selector === 'all' && client.config.owners.includes(message.author.id)) {
 			const header = '__**robbot is currently on the following servers:**__ \n\n';
 			const guilds = client.guilds.map(g => `${g.name} - **${g.memberCount} members**`).join(`\n`);
@@ -55,13 +57,16 @@ class InfoCommand extends Command {
 			.addField('UserID', args.targetMember.user.id, true)
 			.addField('Join date', moment(args.targetMember.joinedAt).format('DD/MM/YY'), true)
 			.addField('Creation date', moment(args.targetMember.user.createdAt).format('DD/MM/YY'), true)
-			.addField('Roles', args.targetMember.roles.array().join(', '), true);
+			.addField('Roles', args.targetMember.roles.map(role => role), true);
 			return message.channel.send({ embed });
 		}
 
 		if (args.selector === 'general') {
 			embed.setAuthor('robbot Status Overview', client.user.avatarURL())
 			.setColor('RANDOM')
+			.addField('Creator(s)/Owner(s)', owners.join(', '), true)
+			.addBlankField(true)
+			.addField('Commands', message.client.commands.size, true)
 			.addField('Total Servers', client.guilds.size, true)
 			.addField('Total Users', client.users.size, true)
 			.addField('Total TextChannels', client.channels.filter(channel => channel.type === 'text').size, true)
