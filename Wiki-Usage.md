@@ -9,6 +9,17 @@
 #### Explanation:
  - guildIDs: An array containing the Discord IDs of the guilds you wish to make robbot leave.
 
+# cancelSound
+
+#### Description: Kill this guild's voice connection if playSound/randomSound bugged out
+
+#### Syntax: `cancelsound`
+
+#### Aliases: `cs`
+
+#### Explanation:
+ - None
+
 # counter
 
 #### Description: Display various information regarding the counter of <https://megumin.love>.
