@@ -2,6 +2,9 @@
 
 #### Description: Blacklist a discord guild.
 
+#### Needed Permissions / Necessary Authorization:
+ - Bot owner
+
 #### Syntax: `blacklist <guildIDs>`
 
 #### Aliases: `bl`
@@ -13,6 +16,9 @@
 
 #### Description: Kill this guild's voice connection if playSound/randomSound bugged out
 
+#### Needed Permissions / Necessary Authorization:
+ - Kick Members, Ban Members
+
 #### Syntax: `cancelsound`
 
 #### Aliases: `cs`
@@ -23,6 +29,10 @@
 # counter
 
 #### Description: Display various information regarding the counter of <https://megumin.love>.
+
+#### Needed Permissions / Necessary Authorization:
+ - None
+  * Bot owner for modifying the counter history
 
 #### Syntax: `counter <selector> <historyArg>`
 
@@ -38,6 +48,9 @@
 
 #### Description: Evaluate javascript code.
 
+#### Needed Permissions / Necessary Authorization:
+ - Bot owner
+
 #### Syntax: `eval <asyncFlag> <code>`
 
 #### Aliases: `ev`
@@ -51,6 +64,9 @@
 
 #### Description: Get usage help.
 
+#### Needed Permissions / Necessary Authorization:
+ - None
+
 #### Syntax: `help`
 
 #### Aliases: `h`, `commands`
@@ -62,6 +78,9 @@
 
 #### Description: Make robbot ignore a user.
 
+#### Needed Permissions / Necessary Authorization:
+ - Kick Members, Ban Members
+
 #### Syntax: `ignore <targetUser>`
 
 #### Aliases: `ig`
@@ -72,6 +91,10 @@
 # info
 
 #### Description: Get various bot-related information.
+
+#### Needed Permissions / Necessary Authorization:
+ - None
+  * Bot owner for `all` argument
 
 #### Syntax: `info <selector> <targetMember>`
 
@@ -86,6 +109,9 @@
 
 #### Description: Measure the delay between command call and execution.
 
+#### Needed Permissions / Necessary Authorization:
+ - None
+
 #### Syntax: `ping`
 
 #### Aliases: `delay`
@@ -96,6 +122,9 @@
 # playSound
 
 #### Description: Play a chosen sound from <https://megumin.love>.
+
+#### Needed Permissions / Necessary Authorization:
+ - None
 
 #### Syntax: `playsound <soundName>`
 
@@ -108,6 +137,9 @@
 
 #### Description: Update the guild count on <https://bots.discord.pw>.
 
+#### Needed Permissions / Necessary Authorization:
+ - Bot owner
+
 #### Syntax: `post`
 
 #### Aliases: None
@@ -118,6 +150,9 @@
 # randomSound
 
 #### Description: Play random sound from <https://megumin.love>.
+
+#### Needed Permissions / Necessary Authorization:
+ - None
 
 #### Syntax: `randomsound`
 
@@ -130,6 +165,9 @@
 
 #### Description: Reloads a command.
 
+#### Needed Permissions / Necessary Authorization:
+ - Bot owner
+
 #### Syntax: `reload <command>`
 
 #### Aliases: `rl`
@@ -140,6 +178,9 @@
 # setAvatar
 
 #### Description: Change robbot's avatar.
+
+#### Needed Permissions / Necessary Authorization:
+ - Bot owner
 
 #### Syntax: `setavatar <imageURL>`
 
@@ -152,6 +193,9 @@
 
 #### Description: Change robbot's game.
 
+#### Needed Permissions / Necessary Authorization:
+ - Bot owner
+
 #### Syntax: `setgame <newGame>`
 
 #### Aliases: `sg`
@@ -162,6 +206,9 @@
 # setNickname
 
 #### Description: Change robbot's nickname.
+
+#### Needed Permissions / Necessary Authorization:
+ - Bot owner
 
 #### Syntax: `setnickname <newNickname>`
 
@@ -174,6 +221,9 @@
 
 #### Description: Change robbot's username.
 
+#### Needed Permissions / Necessary Authorization:
+ - Bot owner
+
 #### Syntax: `setusername <newUsername>`
 
 #### Aliases: `su`
@@ -185,6 +235,9 @@
 
 #### Description: Shuts down robbot.
 
+#### Needed Permissions / Necessary Authorization:
+ - Bot owner
+
 #### Syntax: `shutdown`
 
 #### Aliases: `kill`
@@ -195,6 +248,9 @@
 # toggle
 
 #### Description: Toggle a command on or off.
+
+#### Needed Permissions / Necessary Authorization:
+ - Kick Members, Ban Members
 
 #### Syntax: `toggle <targetCommand>`
 
