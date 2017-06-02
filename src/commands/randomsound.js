@@ -23,7 +23,7 @@ class RandomSoundCommand extends Command {
 
 		if (!message.member.voiceChannel.joinable) return message.reply("i can't connect to that voice channel!");
 
-		if (message.guild.voiceConnection !== null) {
+		if (message.guild.voiceConnection) {
 			return message.reply('please wait for the current sound to finish!');
 		}
 

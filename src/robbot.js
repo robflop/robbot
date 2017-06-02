@@ -7,7 +7,7 @@ const controller = new CommandController();
 
 client
 	.once('ready', () => {
-		client.logger.info('robbot ready!');
+		client.logger.info(`robbot ready! (As ${client.user.tag})`);
 		client.user.setGame(`try '${client.config.commandPrefix} help' !`).then(user => {
 			client.setInterval(() => {
 				if (client.user.presence.game.name === `try '${client.config.commandPrefix} help' !`) {
