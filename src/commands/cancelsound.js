@@ -5,6 +5,7 @@ class CancelSoundCommand extends Command {
 		super({
 			name: 'cancelsound',
 			description: 'Kill this guild\'s voice connection if playSound/randomSound bugged out',
+			guildOnly: true,
 			aliases: ['cs'],
 			perms: {
 				member: ['KICK_MEMBERS', 'BAN_MEMBERS']
