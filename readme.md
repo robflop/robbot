@@ -51,20 +51,21 @@ Refer to the [Wiki Usage page](https://github.com/robflop/robbot/wiki/Usage) for
 
 | Command       | Effect                                                                                             |
 |-------------  |----------------------------------------------------------------------------------------------------|
-| help          | Make the bot PM the user a list of commands                                                        |
-| counter       | Display the current counter of megumin.love (Arguments `history`, `append`, `revert`, `statistics`)|
-| randomsound   | Have the bot join your voice channel and play a random sound from the megumin.love website         |
-| playsound     | Have the bot join your voice channel and play a chosen sound from the megumin.love website         |
-| setGame       | Change the bot's playing status [Bot owner only]                                                   |
-| info          | Display various info about the bot (Arguments `guild`, `user`, `all`)                              |
-| setAvatar     | Change the bot's avatar [Bot owner only]                                                           |
-| setUsername   | Change the bot's username [Bot owner only]                                                         |
-| setNickname   | Change the bot's server nickname [Bot owner or Kick/Ban Permission required]                       |
-| ignore        | Make the bot ignore a user, use a 2nd time to revert [Bot owner or Kick/Ban Permission required]   |
-| POST          | Update the server count on the Discord Bots website (enable command in config) [Bot owner only]    |
-| toggle        | Toggle a command server-wide (on/off) [Bot owner or Kick/Ban Permission required]                  |
-| shutdown      | Shut down the bot remotely [Bot owner only]                                                        |
-| eval          | Have robbot evaluate javascript input and output the result [Bot owner only]                       |
-| blacklist     | Blacklist a discord server so robbot will leave it upon invitation to the server [Bot owner only]  |
+| blacklist     | Blacklist a discord guild                                                                          |
+| cancelSound   | Kill this guild's voice connection if playSound/randomSound bugged out                             |
+| counter       | Display various information regarding the counter of <https://megumin.love>                        |
+| eval          | Evaluate javascript code                                                                           |
+| help          | Get usage help                                                                                     |
+| ignore        | Make robbot ignore a user                                                                          |
+| info          | Get various bot-related information                                                                |
 | ping          | Measure the delay between command call and execution                                               |
-| reload        | Reload a command for easy command updating without restarting the bot [Bot owner only]             |
+| playSound     | Play a chosen sound from <https://megumin.love>                                                    |
+| POST          | Update the guild count on <https://bots.discord.pw>                                                |
+| randomSound   | Play random sound from <https://megumin.love>                                                      |
+| reload        | Reload a command                                                                                   |
+| setAvatar     | Change robbot's avatar                                                                             |
+| setGame       | Change robbot's game                                                                               |
+| setNickname   | Change robbot's nickname                                                                           |
+| setUsername   | Change robbot's username                                                                           |
+| shutdown      | Shut down robbot                                                                                   |
+| toggle        | Toggle a command on or off                                                                         |
