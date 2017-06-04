@@ -87,7 +87,7 @@ class CommandController {
 
 	permissionsCheck(command, message) {
 		let type = '';
-		const clientMember = message.guild.member(message.client.user);
+		const clientMember = message.guild.me;
 		const { perms } = command;
 		const { owners } = message.client.config;
 
