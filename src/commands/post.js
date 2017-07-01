@@ -20,9 +20,8 @@ class PostCommand extends Command {
 		.send(`{"server_count": ${guilds.size}}`)
 		.then(res => message.reply('POST request sent successfully!'))
 		.catch(err => {
-			const errorDetails = `${err.host ? err.host : ''} ${err.text ? err.text : ''}`.trim();
-			message.reply(`an error occurred updating the guild count: \`\`${err.status}: ${errorDetails}\`\``);
-			logger.error(inspect(err));
+			message.reply(`an error occurred updating the guild count: \`\`${err.statusCode}: ${err.statusText}\`\``);
+			logger.error(`Error updating to DiscordBots: ${err.statusCode} - ${err.statusText}`);
 		});
 	}
 }
