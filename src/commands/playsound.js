@@ -34,15 +34,15 @@ class PlaySoundCommand extends Command {
 		}
 
 		snekfetch.get('https://megumin.love/counter?inc=1')
-		.catch(err => message.client.logger.error(inspect(err)));
+			.catch(err => message.client.logger.error(inspect(err)));
 
 		const sounds = require('../data/sounds');
 		const soundsList = `\`\`\`${sounds.join(',\n')}\`\`\``;
 		if (!sounds.includes(args.sound)) {
 			return message.reply('you provided an invalid sound name, check your PMs for a full list of sounds!')
-			.then(msg => msg.author.send(`Choose one of the following: ${soundsList}`).catch(() => {
-				message.reply('i ran into an error DM\'ing you!');
-			}));
+				.then(msg => msg.author.send(`Choose one of the following: ${soundsList}`).catch(() => {
+					message.reply('i ran into an error DM\'ing you!');
+				}));
 		}
 
 		const soundPath = join(__dirname, '..', 'data', 'sounds', args.sound);
@@ -51,13 +51,13 @@ class PlaySoundCommand extends Command {
 		voiceChannel.join().then(connection => {
 			const player = connection.playFile(`${soundPath}.mp3`);
 			connection.on('error', () => message.reply('an error related to the voiceChannel connection itself occurred, sorry! (Try again, maybe?)')
-			.then(message => voiceChannel.leave()));
+				.then(message => voiceChannel.leave()));
 
 			player.on('end', () => voiceChannel.leave());
 			player.on('error', () => message.reply('an error occurred playing the sound file, sorry! (Try again, maybe?)'));
 		// Since 'error' emits an 'end' event, this will result in the voiceconnection being terminated
 		}).catch(error => message.reply('an error occurred while connecting to the voiceChannel, sorry! (Try again, maybe?)')
-		.then(message => voiceChannel.leave()));
+			.then(message => voiceChannel.leave()));
 	}
 }
 

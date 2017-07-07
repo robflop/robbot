@@ -76,8 +76,8 @@ class CommandController {
 		if (!parsedArgs) return;
 
 		const guildConfigs = ['toggle', 'ignore', 'help'].includes(command.name)
-		? { ignoredLists: this.ignoredLists, disabledCommandLists: this.disabledCommandLists }
-		: null;
+			? { ignoredLists: this.ignoredLists, disabledCommandLists: this.disabledCommandLists }
+			: null;
 
 		return command.run(message, parsedArgs, guildConfigs).catch(e => {
 			logger.error(inspect(e));

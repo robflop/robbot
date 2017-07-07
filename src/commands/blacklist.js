@@ -61,7 +61,7 @@ class BlacklistCommand extends Command {
 			result += `${result.includes('added') ? ' & ' : ''}removed ${icb}${removed.join(', ')}${icb} from the list`;
 		}
 		return message.client.logger.writeJSON(blacklist, './data/blacklist.json')
-		.then(blacklist => message.reply(`successfully ${result}!`));
+			.then(blacklist => message.reply(`successfully ${result}!`));
 	}
 }
 

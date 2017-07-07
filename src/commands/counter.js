@@ -46,8 +46,8 @@ class CounterCommand extends Command {
 					const newCounter = `${formatNumber(counter.text)} ${time} ${date}`;
 					history.push(newCounter);
 					logger.writeJSON(history, './data/counterHistory.json')
-					.then(data => message.reply(`new entry successfully added: ${icb}${newCounter}${icb}`))
-					.catch(err => message.reply(`an error occurred writing to the file: ${cb}${err}${cb}`));
+						.then(data => message.reply(`new entry successfully added: ${icb}${newCounter}${icb}`))
+						.catch(err => message.reply(`an error occurred writing to the file: ${cb}${err}${cb}`));
 				}).catch(err => {
 					const errorDetails = `${err.host ? err.host : ''} ${err.message ? err.message : ''}`.trim();
 					message.reply(`an error occurred getting the counter: ${icb}${err.code}: ${errorDetails}${icb}`);
@@ -58,11 +58,11 @@ class CounterCommand extends Command {
 			if (args.historyArg === 'revert' && config.owners.includes(message.author.id)) {
 				history.pop();
 				logger.writeJSON(history, './data/counterHistory.json')
-				.then(data => message.reply('latest history entry successfully removed.'))
-				.catch(err => {
-					message.reply(`an error occurred writing to the file: ${cb}${err}${cb}`);
-					logger.error(inspect(err));
-				});
+					.then(data => message.reply('latest history entry successfully removed.'))
+					.catch(err => {
+						message.reply(`an error occurred writing to the file: ${cb}${err}${cb}`);
+						logger.error(inspect(err));
+					});
 			}
 		}
 

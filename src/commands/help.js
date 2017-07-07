@@ -20,20 +20,20 @@ class HelpCommand extends Command {
 	async run(message, args, guildConfigs) {
 		const { config: { commandPrefix }, commands, aliases } = message.client;
 		const { disabledCommandLists, ignoredLists } = guildConfigs;
-		const avatar = message.client.user.avatarURL();
+		const avatar = message.client.user.avatarURL;
 		const icb = '``';
 
 		if (args.command) {
-			const command = commands.get(args.command) || commands.get(aliases.get(command));
+			const command = commands.get(args.command) || commands.get(aliases.get(args.command));
 			if (!command) return message.reply(`${args.command} isn't a valid command.`);
 
 			const embed = new RichEmbed()
-			.setAuthor(`robbot Command Help - ${command.name}`, avatar)
-			.setDescription(`**${command.name.capitalize()}** - ${command.description}`)
-			.setColor('RANDOM')
-			.addField('Aliases', command.aliases.join(', ') || 'None', true)
-			.addField('Cooldown', `${command.cooldown} seconds`, true)
-			.addField('Syntax', `${commandPrefix}${command.name} ${command.args.map(arg => `<${arg.name}>`).join(' ')}`, true);
+				.setAuthor(`robbot Command Help - ${command.name}`, avatar)
+				.setDescription(`**${command.name.capitalize()}** - ${command.description}`)
+				.setColor('RANDOM')
+				.addField('Aliases', command.aliases.join(', ') || 'None', true)
+				.addField('Cooldown', `${command.cooldown} seconds`, true)
+				.addField('Syntax', `${commandPrefix} ${command.name} ${command.args.map(arg => `<${arg.name}>`).join(' ')}`, true);
 
 			if (command.ownersOnly) embed.addField('Owners Only', 'Yes', true);
 			if (command.guildOnly) embed.addField('Guild Only', 'Yes', true);
@@ -64,8 +64,8 @@ class HelpCommand extends Command {
 		help += `Also refer to ${wikiLink} for extensive Command usage help that explains each argument for every command in detail.`;
 
 		return message.author.send(help, { split: true })
-		.then(msg => msg.channel.type === 'text' ? message.reply('i\'ve sent you a list with all of my commands!') : null)
-		.catch(() => message.reply('i ran into an error DM\'ing you!'));
+			.then(msg => msg.channel.type === 'text' ? message.reply('i\'ve sent you a list with all of my commands!') : null)
+			.catch(() => message.reply('i ran into an error DM\'ing you!'));
 	}
 
 	listCommands(commands) {

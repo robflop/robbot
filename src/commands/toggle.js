@@ -38,21 +38,21 @@ class ToggleCommand extends Command {
 			if (index === -1) {
 				disabledCommandList.push(args.targetCommand);
 				logger.writeJSON(disabledCommandList, `./data/guilds/toggled_${message.guild.id}.json`)
-				.then(disabledCommandList => message.reply(`the ${icb}${args.targetCommand}${icb} command has been disabled!`))
-				.catch(err => message.reply(`an error occurred writing to the file: ${cb}${err}${cb}`));
+					.then(disabledCommandList => message.reply(`the ${icb}${args.targetCommand}${icb} command has been disabled!`))
+					.catch(err => message.reply(`an error occurred writing to the file: ${cb}${err}${cb}`));
 			}
 			else {
 				disabledCommandList.splice(index, 1);
 				logger.writeJSON(disabledCommandList, `./data/guilds/toggled_${message.guild.id}.json`)
-				.then(disabledCommandList => message.reply(`the ${icb}${args.targetCommand}${icb} command has been enabled!`))
-				.catch(err => message.reply(`an error occurred writing to the file: ${cb}${err}${cb}`));
+					.then(disabledCommandList => message.reply(`the ${icb}${args.targetCommand}${icb} command has been enabled!`))
+					.catch(err => message.reply(`an error occurred writing to the file: ${cb}${err}${cb}`));
 			}
 		}
 		else {
 			disabledCommandList = disabledCommandLists.set(message.guild.id, [args.targetCommand]);
 			logger.writeJSON(disabledCommandLists.get(message.guild.id), `./data/guilds/toggled_${message.guild.id}.json`)
-			.then(disabledCommandList => message.reply(`the ${icb}${args.targetCommand}${icb} command has been disabled!`))
-			.catch(err => message.reply(`an error occurred writing to the file: ${cb}${err}${cb}`));
+				.then(disabledCommandList => message.reply(`the ${icb}${args.targetCommand}${icb} command has been disabled!`))
+				.catch(err => message.reply(`an error occurred writing to the file: ${cb}${err}${cb}`));
 		}
 	}
 }

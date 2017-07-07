@@ -15,7 +15,7 @@ class CancelSoundCommand extends Command {
 
 	async run(message, args) {
 		if (!message.guild.voiceConnection) {
-			return message.reply('i\'m not on a voiceChannel of this guild!');
+			return message.reply('i\'m not in a voiceChannel of this guild!');
 		}
 
 		await message.guild.voiceConnection.disconnect();
