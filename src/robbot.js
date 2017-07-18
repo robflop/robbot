@@ -15,8 +15,11 @@ client
 				}
 				else if (client.user.presence.game.name === 'on megumin.love') {
 					client.user.setGame(`try '${client.config.commandPrefix} help' !`);
-				}
-			// leave untouched if neither of the default ones
+				} // leave untouched if neither of the default ones
+
+				// eslint-disable-next-line max-nested-callbacks
+				const botGuilds = client.guilds.filter(guild => guild.members.filter(member => member.user.bot) >= (guild.memberCount / 100 * 80));
+				botGuilds ? botGuilds.map(guild => guild.leave()) : null;
 			}, 1000 * 60 * 30);
 		});
 	})
