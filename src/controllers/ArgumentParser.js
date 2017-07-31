@@ -49,7 +49,6 @@ class ArgumentParser {
 	}
 
 	static toUser(message, arg) {
-		console.log((discordIDRegex.exec(arg) || [])[1]);
 		const found = message.mentions.users.get((discordIDRegex.exec(arg) || [])[1])
 			|| message.client.users.get(arg)
 			|| message.client.users.find(user => user.username.toLowerCase().includes(arg.toLowerCase()));
