@@ -36,7 +36,7 @@ class InfoCommand extends Command {
 			return message.channel.send(`${header}${guilds}`, { split: true });
 		}
 
-		if (args.selector === 'guild') {
+		else if (args.selector === 'guild') {
 			embed.setAuthor(`Overview for '${message.guild.name}'`, message.guild.iconURL)
 				.setColor('RANDOM')
 				.addField('Users', message.guild.memberCount, true)
@@ -48,7 +48,7 @@ class InfoCommand extends Command {
 			return message.channel.send({ embed });
 		}
 
-		if (args.selector === 'user') {
+		else if (args.selector === 'user') {
 			args.targetMember === 'self' ? args.targetMember = message.guild.member(message.author) : null;
 			embed.setAuthor(`Overview for '${args.targetMember.user.tag}'`, args.targetMember.user.avatarURL)
 				.setColor('RANDOM')
@@ -61,7 +61,7 @@ class InfoCommand extends Command {
 			return message.channel.send({ embed });
 		}
 
-		if (args.selector === 'general') {
+		else if (args.selector === 'general') {
 			embed.setAuthor('robbot Status Overview', client.user.avatarURL)
 				.setColor('RANDOM')
 				.addField('Creator(s)/Owner(s)', owners.join(', '), true)
