@@ -75,6 +75,8 @@ class InfoCommand extends Command {
 				.addField('Bot Uptime', moment.duration(client.uptime).humanize(), true);
 			message.channel.send({ embed });
 		}
+
+		else return message.channel.send('Invalid selector!');
 	}
 }
 
