@@ -9,7 +9,7 @@
     "moment": "^2.18.1",
     "opusscript": "^0.0.3",
     "prism-media": "github:hydrabolt/prism-media",
-    "snekfetch": "^3.2.8"
+    "snekfetch": "^3.2.4"
   },
   "devDependencies": {
     "eslint": "^4.4.1"
