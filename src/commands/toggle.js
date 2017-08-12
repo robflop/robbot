@@ -22,7 +22,7 @@ class ToggleCommand extends Command {
 		const { logger, commands, aliases } = message.client;
 		const cb = '```', icb = '``';
 
-		if (['help', 'toggle', 'shutdown'].includes(args.targetCommand)) {
+		if (['help', 'toggle', 'power'].includes(args.targetCommand)) {
 			return message.reply(`the ${icb}${args.targetCommand}${icb} command may not be toggled.`);
 		}
 

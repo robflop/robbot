@@ -231,19 +231,19 @@
 #### Explanation:
  - newUsername: The new username you wish robbot to use.
 
-# shutdown
+# power
 
-#### Description: Shuts down robbot.
+#### Description: Restart or shutdown robbot.
 
 #### Needed Permissions / Necessary Authorization:
  - Bot owner
 
-#### Syntax: `shutdown`
+#### Syntax: `power <action>`
 
-#### Aliases: `kill`
+#### Aliases: `pw`
 
 #### Explanation:
- - None
+ - action: The action you wish to take, either `shutdown` or `restart`.
 
 # toggle
 
