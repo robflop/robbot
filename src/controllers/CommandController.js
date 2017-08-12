@@ -32,7 +32,9 @@ class CommandController {
 		}
 	}
 
-	async handleCommand(message) {
+	async handleCommand(message) { // eslint-disable-line complexity
+		if (!message.author.bot && message.content === `${message.client.user.username}, kys`) return message.channel.send('kms');
+
 		if (message.author.bot || !message.content.startsWith(message.client.config.commandPrefix)) return;
 		if (message.channel.type === 'text' && (this.ignoredLists.get(message.guild.id) || []).includes(message.author.id)) return;
 
