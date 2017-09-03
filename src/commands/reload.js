@@ -28,11 +28,12 @@ class ReloadCommand extends Command {
 	reloadCommand(command, message) {
 		const { commands, aliases } = message.client;
 		if (!commands.has(command)) return;
-		const CommandClass = require(`./${command}.js`);
-		const cmd = new CommandClass();
 
 		delete require.cache[require.resolve(`./${command}`)];
 		commands.delete(command);
+
+		const CommandClass = require(`./${command}.js`);
+		const cmd = new CommandClass();
 
 		for (const alias of aliases.keys()) {
 			if (aliases.get(alias) === command) aliases.delete(alias);
