@@ -12,12 +12,12 @@ class CounterCommand extends Command {
 			args: [
 				{
 					type: 'string',
-					name: 'selector',
+					name: 'primarySelector',
 					defaultVal: 'general'
 				},
 				{
 					type: 'string',
-					name: 'historyArg',
+					name: 'secondarySelector',
 					defaultVal: 'general'
 				}
 			]
@@ -32,16 +32,16 @@ class CounterCommand extends Command {
 		const fl = input => input < 9 ? `0${input}` : `${input}`;
 		const time = `${fl(newDate.getHours())}:${fl(newDate.getMinutes())}`;
 		const date = `${fl(newDate.getDate())}/${fl(newDate.getMonth() + 1)}/${fl(newDate.getFullYear())}`;
-		if (args.selector === 'history') {
+		if (args.primarySelector === 'history') {
 			const history = require('../data/counterHistory.json');
 
-			if (args.historyArg === 'general') {
+			if (args.secondarySelector === 'general') {
 				const historyHeader = '**__Here is an overview of the counter\'s saved progress history__**:\n';
 				const historyBody = `${cb}${history.join('\n')}${cb}`;
 				return message.channel.send(`${historyHeader}${historyBody}`, { split: { prepend: cb, append: cb } });
 			}
 
-			if (args.historyArg === 'append' && config.owners.includes(message.author.id)) {
+			if (args.secondarySelector === 'append' && config.owners.includes(message.author.id)) {
 				return snekfetch.get('https://megumin.love/counter').then(counter => {
 					const newCounter = `${formatNumber(counter.text)} ${time} ${date}`;
 					history.push(newCounter);
@@ -55,7 +55,7 @@ class CounterCommand extends Command {
 				});
 			}
 
-			if (args.historyArg === 'revert' && config.owners.includes(message.author.id)) {
+			if (args.secondarySelector === 'revert' && config.owners.includes(message.author.id)) {
 				history.pop();
 				logger.writeJSON(history, './data/counterHistory.json')
 					.then(data => message.reply('latest history entry successfully removed.'))
@@ -66,28 +66,52 @@ class CounterCommand extends Command {
 			}
 		}
 
-		if (args.selector === 'statistics') {
-			snekfetch.get('https://megumin.love/counter?statistics').then(statistics => {
-				const parsedStats = JSON.parse(statistics.text);
-				const embed = new RichEmbed();
-				embed.setAuthor('megumin.love Counter Statistics', 'https://megumin.love/images/favicon.ico')
-					.setURL('https://megumin.love/')
-					.setColor((Math.random() * 10e4).toFixed(5))
-					.addField('All-time', formatNumber(parsedStats.alltime), true)
-					.addField('Today', formatNumber(parsedStats.today), true)
-					.addField('This week', formatNumber(parsedStats.week), true)
-					.addField('This month', formatNumber(parsedStats.month), true)
-					.addBlankField(true)
-					.addField('Average/day', formatNumber(parsedStats.average), true);
-				return message.channel.send({ embed });
-			}).catch(err => {
-				const errorDetails = `${err.host ? err.host : ''} ${err.message ? err.message : ''}`.trim();
-				message.reply(`an error occurred getting the statistics: ${cb}${err.code}: ${errorDetails}${cb}`);
-				logger.error(inspect(err));
-			});
+		if (args.primarySelector === 'statistics') {
+			if (args.secondarySelector === 'general') {
+				snekfetch.get('https://megumin.love/counter?statistics').then(statistics => {
+					const parsedStats = JSON.parse(statistics.text);
+					const embed = new RichEmbed();
+					embed.setAuthor('megumin.love Counter Statistics', 'https://megumin.love/images/favicon.ico')
+						.setURL('https://megumin.love/')
+						.setColor((Math.random() * 10e4).toFixed(5))
+						.addField('All-time', formatNumber(parsedStats.alltime), true)
+						.addField('Today', formatNumber(parsedStats.daily), true)
+						.addField('This week', formatNumber(parsedStats.weekly), true)
+						.addField('This month', formatNumber(parsedStats.monthly), true)
+						.addBlankField(true)
+						.addField('Average/day', formatNumber(parsedStats.average), true);
+					return message.channel.send({ embed });
+				}).catch(err => {
+					const errorDetails = `${err.host ? err.host : ''} ${err.message ? err.message : ''}`.trim();
+					message.reply(`an error occurred getting the statistics: ${cb}${err.code}: ${errorDetails}${cb}`);
+					logger.error(inspect(err));
+				});
+			}
+
+			if (args.secondarySelector === 'rankings') {
+				snekfetch.get('https://megumin.love/counter?rankings').then(rankings => {
+					const parsedRanks = JSON.parse(rankings.text).slice(0, 10);
+					const embed = new RichEmbed();
+					embed.setAuthor('megumin.love Soundboard Rankings', 'https://megumin.love/images/favicon.ico')
+						.setURL('https://megumin.love/')
+						.setColor((Math.random() * 10e4).toFixed(5));
+
+					for (const rank of parsedRanks) {
+						if (parsedRanks.indexOf(rank) + 1 === 10) embed.addBlankField(true); // centering of 10th rank
+						embed.addField(`#${parsedRanks.indexOf(rank) + 1}: ${rank.displayName}`, `${rank.count} clicks`, true);
+						if (parsedRanks.indexOf(rank) + 1 === 10) embed.addBlankField(true); // centering of 10th rank
+					}
+
+					return message.channel.send({ embed });
+				}).catch(err => {
+					const errorDetails = `${err.host ? err.host : ''} ${err.message ? err.message : ''}`.trim();
+					message.reply(`an error occurred getting the rankings: ${cb}${err.code}: ${errorDetails}${cb}`);
+					logger.error(inspect(err));
+				});
+			}
 		}
 
-		if (args.selector === 'general') {
+		if (args.primarySelector === 'general') {
 			snekfetch.get('https://megumin.love/counter').then(counter => {
 				const celebrations = counter.text % 100000 === 0 ? '🎉' : counter.text % 10000000 === 0 ? '🎊🎉' : '';
 				const formattedCounter = `${celebrations} **${formatNumber(counter.text)}** ${celebrations}`.trim();
