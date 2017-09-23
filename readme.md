@@ -38,7 +38,6 @@ Use it with `<prefix> <command>`. It will also be listed in the `help` command.
 
 - By default, a command cooldown of 3 seconds is applied and the default prefix is set to `robbot,`.
 - DiscordBots integration is disabled by default. Activate the command in the config and set your API token to use it. (Not able to activate using the `toggle` command)
-- The `eval` command is also disabled by default for safety reasons. Enable it in the config. (Neither able to activate using `toggle` before this change)
 - To make the bot use PM2 (relevant for `power` command aswell as `disconnect` handling), switch the config setting to true. It will then kill the pm2 process on usage of the `power` command and restart the process on disconnect.
 
 #### License
