@@ -18,8 +18,8 @@ client
 				} // leave untouched if neither of the default ones
 
 				// eslint-disable-next-line max-nested-callbacks
-				const botGuilds = client.guilds.filter(guild => guild.members.filter(member => member.user.bot) >= (guild.memberCount / 100 * 80));
-				botGuilds ? botGuilds.map(guild => guild.leave()) : null;
+				const botGuilds = client.guilds.filter(guild => guild.members.filter(member => member.user.bot) >= (guild.memberCount / 100 * 80))
+					.map(guild => guild.leave());
 			}, 1000 * 60 * 30);
 		});
 	})
