@@ -98,7 +98,7 @@ class CounterCommand extends Command {
 
 					for (const rank of parsedRanks) {
 						if (parsedRanks.indexOf(rank) + 1 === 10) embed.addBlankField(true); // centering of 10th rank
-						embed.addField(`#${parsedRanks.indexOf(rank) + 1}: ${rank.displayName}`, `${rank.count} clicks`, true);
+						embed.addField(`#${parsedRanks.indexOf(rank) + 1}: ${rank.displayName}`, `${formatNumber(rank.count)} clicks`, true);
 						if (parsedRanks.indexOf(rank) + 1 === 10) embed.addBlankField(true); // centering of 10th rank
 					}
 
