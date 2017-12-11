@@ -4,8 +4,7 @@ const DiscordAPIError = require('discord.js/src/client/rest/DiscordAPIError');
 
 const client = new RobbotClient({
 	disabledEvents: ['GUILD_SYNC', 'GUILD_BAN_ADD', 'GUILD_BAN_REMOVE', 'CHANNEL_PINS_UPDATE', 'USER_NOTE_UPDATE',
-		'USER_SETTINGS_UPDATE', 'PRESENCE_UPDATE', 'VOICE_STATE_UPDATE', 'TYPING_START', 'VOICE_SERVER_UPDATE',
-		'RELATIONSHIP_ADD', 'RELATIONSHIP_REMOVE']
+		'USER_SETTINGS_UPDATE', 'PRESENCE_UPDATE', 'TYPING_START', 'RELATIONSHIP_ADD', 'RELATIONSHIP_REMOVE']
 });
 const controller = new CommandController();
 
