@@ -1,6 +1,7 @@
 const { Client, Collection } = require('discord.js');
 const { join } = require('path');
 const { readdirSync } = require('fs');
+const WebSocket = require('uws');
 
 class RobbotClient extends Client {
 	constructor(options) {
@@ -11,6 +12,7 @@ class RobbotClient extends Client {
 		this.events = new Collection();
 		this.config = require('../config');
 		this.logger = require('../util/Logger');
+		this.meguWebSocket = new WebSocket('wss://megumin.love');
 
 		const cmdDir = join(__dirname, '..', 'commands');
 		const cmdFiles = readdirSync(cmdDir).filter(file => file.endsWith('.js'));

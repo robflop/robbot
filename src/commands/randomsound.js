@@ -1,5 +1,4 @@
 const Command = require('../structures/Command');
-const snekfetch = require('snekfetch');
 const { inspect } = require('util');
 const { join } = require('path');
 
@@ -17,6 +16,8 @@ class RandomSoundCommand extends Command {
 	}
 
 	async run(message, args) {
+		const ws = message.client.meguWebSocket;
+
 		if (!message.member.voiceChannel) {
 			return message.reply('join a voice channel first!');
 		}
@@ -27,8 +28,8 @@ class RandomSoundCommand extends Command {
 			return message.reply('please wait for the current sound to finish!');
 		}
 
-		snekfetch.get('https://megumin.love/counter?inc=1')
-			.catch(err => message.client.logger.error(inspect(err)));
+		if (ws.readyState !== 1) message.client.logger.error(`(${this.name}) Error connecting to megumin.love, readyState ${ws.readyState}`);
+		else ws.send(JSON.stringify({ type: 'click' }));
 
 		const sounds = require('../data/sounds');
 		const sound = sounds[Math.floor(Math.random() * sounds.length)];
