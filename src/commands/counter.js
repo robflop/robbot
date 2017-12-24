@@ -71,7 +71,7 @@ class CounterCommand extends Command {
 				snekfetch.get('https://megumin.love/counter?statistics').then(statistics => {
 					const parsedStats = JSON.parse(statistics.text);
 					const embed = new RichEmbed();
-					embed.setAuthor('megumin.love Counter Statistics', 'https://megumin.love/images/favicon.ico')
+					embed.setAuthor('megumin.love Counter Statistics', 'https://megumin.love/images/favicons/favicon.ico')
 						.setURL('https://megumin.love/')
 						.setColor((Math.random() * 10e4).toFixed(5))
 						.addField('All-time', formatNumber(parsedStats.alltime), true)
@@ -92,7 +92,7 @@ class CounterCommand extends Command {
 				snekfetch.get('https://megumin.love/counter?rankings').then(rankings => {
 					const parsedRanks = JSON.parse(rankings.text).slice(0, 10);
 					const embed = new RichEmbed();
-					embed.setAuthor('megumin.love Soundboard Rankings', 'https://megumin.love/images/favicon.ico')
+					embed.setAuthor('megumin.love Soundboard Rankings', 'https://megumin.love/images/favicons/favicon.ico')
 						.setURL('https://megumin.love/')
 						.setColor((Math.random() * 10e4).toFixed(5));
 
