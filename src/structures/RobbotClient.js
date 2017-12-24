@@ -56,6 +56,8 @@ class RobbotClient extends Client {
 		const eventPhrase = eventFiles.length !== 1 ? 'events' : 'event';
 
 		this.logger.info(`Loaded ${this.commands.size} ${commandPhrase} and ${eventFiles.length} ${eventPhrase}.`);
+
+		this.meguWebSocket.on('open', () => this.logger.info('WebSocket connected to wss://megumin.love!'));
 	}
 
 	leave(guildIDs = []) {
