@@ -6,7 +6,7 @@ npm-debug.log*
 
 # ignore some settings
 src/config.json
-src/data
+src/data/guilds
 
 # unignore relevant files/folders
 !src/data/sounds

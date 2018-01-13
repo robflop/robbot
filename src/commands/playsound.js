@@ -35,7 +35,7 @@ class PlaySoundCommand extends Command {
 		}
 
 		if (ws.readyState !== 1) message.client.logger.error(`(${this.name}) Error connecting to megumin.love, readyState ${ws.readyState}`);
-		else ws.send(JSON.stringify({ type: 'click' }));
+		else ws.send(JSON.stringify({ type: 'sbClick', sound: { filename: args.sound } }));
 
 		const sounds = require('../data/sounds');
 		const soundsList = `\`\`\`${sounds.join(',\n')}\`\`\``;
