@@ -24,6 +24,7 @@ module.exports = [
 	'isee',
 	'itai',
 	'itscold',
+	'kazuma',
 	'ladiesfirst',
 	'lalala',
 	'losion',
