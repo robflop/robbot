@@ -57,7 +57,7 @@ class RobbotClient extends Client {
 
 		this.logger.info(`Loaded ${this.commands.size} ${commandPhrase} and ${eventFiles.length} ${eventPhrase}.`);
 
-		this.meguWebSocket.on('open', () => this.logger.info('WebSocket connected to wss://megumin.love!'));
+		this.connectWebSocket(this.meguWebSocket); // recursive function to handle reconnects etc
 	}
 
 	leave(guildIDs = []) {
@@ -73,6 +73,20 @@ class RobbotClient extends Client {
 			const g = guilds.map(g => `${g.name} (${g.id})`).join(', ');
 			return `Success! The following guilds were left: ${g}`;
 		}).catch(err => err);
+	}
+
+	connectWebSocket(ws) {
+		ws = new WebSocket('wss://megumin.love');
+
+		ws.on('open', () => this.logger.info('WebSocket (re-)connected to wss://megumin.love!'));
+		ws.on('close', () => {
+			this.logger.warn('megumin.love WebSocket closed, trying to reconnect...');
+			setTimeout(() => this.connectWebSocket(ws), 1000 * 5);
+		});
+		ws.on('error', () => {
+			this.logger.error('(Re-)Connection to the megumin.love WebSocket failed! Retrying...');
+			setTimeout(() => this.connectWebSocket(ws), 1000 * 5);
+		});
 	}
 }
 
