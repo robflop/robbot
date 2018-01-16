@@ -11,18 +11,17 @@ const controller = new CommandController();
 client
 	.once('ready', () => {
 		client.logger.info(`robbot ready! (As ${client.user.tag})`);
-		client.user.setGame(`try '${client.config.commandPrefix} help' !`).then(user => {
+		client.user.setActivity(`for commands. | Try '${client.config.commandPrefix} help' !`, { type: 'WATCHING' }).then(user => {
 			client.setInterval(() => {
-				if (client.user.presence.game.name === `try '${client.config.commandPrefix} help' !`) {
-					client.user.setGame('on megumin.love');
+				if (client.user.presence.game.name === `for commands. | Try '${client.config.commandPrefix} help' !`) {
+					client.user.setActivity('on megumin.love');
 				}
 				else if (client.user.presence.game.name === 'on megumin.love') {
-					client.user.setGame(`try '${client.config.commandPrefix} help' !`);
+					client.user.setActivity(`for commands. | Try '${client.config.commandPrefix} help' !`, { type: 'WATCHING' });
 				} // leave untouched if neither of the default ones
 
-				// eslint-disable-next-line max-nested-callbacks
-				const botGuilds = client.guilds.filter(guild => guild.members.filter(member => member.user.bot) >= (guild.memberCount / 100 * 80))
-					.map(guild => guild.leave());
+				// eslint-disable-next-line max-nested-callbacks, max-len
+				client.guilds.filter(guild => guild.members.filter(member => member.user.bot) >= (guild.memberCount / 100 * 80)).map(guild => guild.leave());
 			}, 1000 * 60 * 30);
 		});
 	})
