@@ -12,7 +12,7 @@ class RobbotClient extends Client {
 		this.events = new Collection();
 		this.config = require('../config');
 		this.logger = require('../util/Logger');
-		this.meguWebSocket = new WebSocket('wss://megumin.love');
+		this.meguWebSocket = new WebSocket();
 
 		const cmdDir = join(__dirname, '..', 'commands');
 		const cmdFiles = readdirSync(cmdDir).filter(file => file.endsWith('.js'));
@@ -85,7 +85,7 @@ class RobbotClient extends Client {
 		});
 		ws.on('error', () => {
 			this.logger.error('(Re-)Connection to the megumin.love WebSocket failed! Retrying...');
-			setTimeout(() => this.connectWebSocket(ws), 1000 * 5);
+			setInterval(() => this.connectWebSocket(ws), 1000 * 5);
 		});
 	}
 }
