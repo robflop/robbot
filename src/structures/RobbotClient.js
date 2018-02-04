@@ -57,7 +57,7 @@ class RobbotClient extends Client {
 
 		this.logger.info(`Loaded ${this.commands.size} ${commandPhrase} and ${eventFiles.length} ${eventPhrase}.`);
 
-		this.connectWebSocket(this.meguWebSocket); // recursive function to handle reconnects etc
+		this.connectWebSocket(); // recursive function to handle reconnects etc
 	}
 
 	leave(guildIDs = []) {
@@ -75,17 +75,20 @@ class RobbotClient extends Client {
 		}).catch(err => err);
 	}
 
-	connectWebSocket(ws) {
-		ws = new WebSocket('wss://megumin.love');
+	connectWebSocket() {
+		this.meguWebSocket = new WebSocket('wss://megumin.love');
 
-		ws.on('open', () => this.logger.info('WebSocket (re-)connected to wss://megumin.love!'));
-		ws.on('close', () => {
-			this.logger.warn('megumin.love WebSocket closed, trying to reconnect...');
-			setTimeout(() => this.connectWebSocket(ws), 1000 * 5);
+		this.meguWebSocket.on('open', () => {
+			this.logger.info(`WebSocket (re-)connected to wss://megumin.love! (readyState ${this.meguWebSocket.readyState})`);
+			setInterval(() => this.logger.debug(`readyState ${this.meguWebSocket.readyState}`), 1000);
 		});
-		ws.on('error', () => {
+		this.meguWebSocket.on('close', () => {
+			this.logger.warn('megumin.love WebSocket closed, trying to reconnect...');
+			setTimeout(() => this.connectWebSocket(this.meguWebSocket), 1000 * 5);
+		});
+		this.meguWebSocket.on('error', () => {
 			this.logger.error('(Re-)Connection to the megumin.love WebSocket failed! Retrying...');
-			setInterval(() => this.connectWebSocket(ws), 1000 * 5);
+			setTimeout(() => this.connectWebSocket(this.meguWebSocket), 1000 * 5);
 		});
 	}
 }
