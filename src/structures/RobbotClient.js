@@ -80,7 +80,6 @@ class RobbotClient extends Client {
 
 		this.meguWebSocket.on('open', () => {
 			this.logger.info(`WebSocket (re-)connected to wss://megumin.love! (readyState ${this.meguWebSocket.readyState})`);
-			setInterval(() => this.logger.debug(`readyState ${this.meguWebSocket.readyState}`), 1000);
 		});
 		this.meguWebSocket.on('close', () => {
 			this.logger.warn('megumin.love WebSocket closed, trying to reconnect...');
