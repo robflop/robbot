@@ -87,7 +87,7 @@ class CommandController {
 		});
 	}
 
-	permissionsCheck(command, message) {
+	async permissionsCheck(command, message) {
 		let type = '';
 		const clientMember = message.guild.me;
 		const { perms } = command;
@@ -100,6 +100,8 @@ class CommandController {
 				return false;
 			}
 		}
+
+		if (!message.member) message.member = await message.guild.fetchMember(message.author);
 
 		if ('client' in perms && !clientMember.permissions.has(perms.client)) type = 'client';
 		if ('member' in perms && !message.member.permissions.has(perms.member)) type = 'member';
