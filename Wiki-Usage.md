@@ -133,20 +133,6 @@
 #### Explanation: 
  - soundName: The name of the sound you wish to play. A list of these can either be received by providing an invalid one, or by checking the soundboard at <https://megumin.love/soundboard>.
 
-# post
-
-#### Description: Update the guild count on <https://bots.discord.pw>.
-
-#### Needed Permissions / Necessary Authorization:
- - Bot owner
-
-#### Syntax: `post`
-
-#### Aliases: None
-
-#### Explanation:
- - None
-
 # randomSound
 
 #### Description: Play random sound from <https://megumin.love>.

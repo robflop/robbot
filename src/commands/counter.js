@@ -1,5 +1,5 @@
 const Command = require('../structures/Command');
-const snekfetch = require('snekfetch');
+const axios = require('axios');
 const { RichEmbed } = require('discord.js');
 const { inspect } = require('util');
 
@@ -42,8 +42,8 @@ class CounterCommand extends Command {
 			}
 
 			if (args.secondarySelector === 'append' && config.owners.includes(message.author.id)) {
-				return snekfetch.get('https://megumin.love/counter').then(counter => {
-					const newCounter = `${formatNumber(counter.text)} ${time} ${date}`;
+				return axios.get('https://megumin.love/counter').then(counter => {
+					const newCounter = `${formatNumber(counter.data)} ${time} ${date}`;
 					history.push(newCounter);
 					logger.writeJSON(history, './data/counterHistory.json')
 						.then(data => message.reply(`new entry successfully added: ${icb}${newCounter}${icb}`))
@@ -68,18 +68,17 @@ class CounterCommand extends Command {
 
 		if (args.primarySelector === 'statistics') {
 			if (args.secondarySelector === 'general') {
-				snekfetch.get('https://megumin.love/counter?statistics').then(statistics => {
-					const parsedStats = JSON.parse(statistics.text);
+				axios.get('https://megumin.love/counter?statistics').then(statistics => {
 					const embed = new RichEmbed();
-					embed.setAuthor('megumin.love Counter Statistics', 'https://megumin.love/images/favicons/favicon.ico')
+					embed.setAuthor('megumin.love Counter Statistics', 'https://megumin.love/images/favicons/favicon-32x32.png')
 						.setURL('https://megumin.love/')
 						.setColor((Math.random() * 10e4).toFixed(5))
-						.addField('All-time', formatNumber(parsedStats.alltime), true)
-						.addField('Today', formatNumber(parsedStats.daily), true)
-						.addField('This week', formatNumber(parsedStats.weekly), true)
-						.addField('This month', formatNumber(parsedStats.monthly), true)
+						.addField('All-time', formatNumber(statistics.data.alltime), true)
+						.addField('Today', formatNumber(statistics.data.daily), true)
+						.addField('This week', formatNumber(statistics.data.weekly), true)
+						.addField('This month', formatNumber(statistics.data.monthly), true)
 						.addBlankField(true)
-						.addField('Average/day', formatNumber(parsedStats.average), true);
+						.addField('Average/day', formatNumber(statistics.data.average), true);
 					return message.channel.send({ embed });
 				}).catch(err => {
 					const errorDetails = `${err.host ? err.host : ''} ${err.message ? err.message : ''}`.trim();
@@ -89,10 +88,10 @@ class CounterCommand extends Command {
 			}
 
 			if (args.secondarySelector === 'rankings') {
-				snekfetch.get('https://megumin.love/counter?rankings').then(rankings => {
-					const parsedRanks = JSON.parse(rankings.text).slice(0, 10);
+				axios.get('https://megumin.love/counter?rankings').then(rankings => {
+					const parsedRanks = rankings.data.slice(0, 10);
 					const embed = new RichEmbed();
-					embed.setAuthor('megumin.love Soundboard Rankings', 'https://megumin.love/images/favicons/favicon.ico')
+					embed.setAuthor('megumin.love Soundboard Rankings', 'https://megumin.love/images/favicons/favicon-32x32.png')
 						.setURL('https://megumin.love/')
 						.setColor((Math.random() * 10e4).toFixed(5));
 
@@ -112,9 +111,9 @@ class CounterCommand extends Command {
 		}
 
 		if (args.primarySelector === 'general') {
-			snekfetch.get('https://megumin.love/counter').then(counter => {
-				const celebrations = counter.text % 100000 === 0 ? '🎉' : counter.text % 10000000 === 0 ? '🎊🎉' : '';
-				const formattedCounter = `${celebrations} **${formatNumber(counter.text)}** ${celebrations}`.trim();
+			axios.get('https://megumin.love/counter').then(counter => {
+				const celebrations = counter.data % 100000 === 0 ? '🎉' : counter.data % 10000000 === 0 ? '🎊🎉' : '';
+				const formattedCounter = `${celebrations} **${formatNumber(counter.data)}** ${celebrations}`.trim();
 				return message.channel.send(`Current https://megumin.love count is: ${formattedCounter}`);
 			}).catch(err => {
 				const errorDetails = `${err.host ? err.host : ''} ${err.message ? err.message : ''}`.trim();

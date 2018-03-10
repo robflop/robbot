@@ -4,7 +4,7 @@
 
 A Discord bot to go along with my website, [megumin.love](https://megumin.love).
 
-Written using discord.js, using opusscript, snekfetch, moment and prism-media packages (plus some standard node ones).
+Written using discord.js, using opusscript, axios, moment and prism-media packages (plus some standard node ones).
 
 Add the bot to your server: [Invite me](https://discordapp.com/oauth2/authorize?client_id=257126756069277696&scope=bot&permissions=70274048)
 
@@ -59,7 +59,6 @@ Refer to the [Wiki Usage page](https://github.com/robflop/robbot/wiki/Usage) for
 | info          | Get various bot-related information                                                                |
 | ping          | Measure the delay between command call and execution                                               |
 | playSound     | Play a chosen sound from <https://megumin.love>                                                    |
-| POST          | Update the guild count on <https://bots.discord.pw>                                                |
 | randomSound   | Play random sound from <https://megumin.love>                                                      |
 | reload        | Reload a command                                                                                   |
 | setAvatar     | Change robbot's avatar                                                                             |
