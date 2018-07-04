@@ -60,9 +60,19 @@ class ArgumentParser {
 	}
 
 	static toMember(message, arg) {
-		return message.guild.members.get((discordIDRegex.exec(arg) || [])[1])
-			|| message.guild.members.get(arg)
-			|| message.guild.members.find(member => member.displayName.toLowerCase().includes(arg.toLowerCase()));
+		let member = message.guild.members.get((discordIDRegex.exec(arg) || [])[1])
+		|| message.guild.members.get(arg)
+		|| message.guild.members.find(member => member.displayName.toLowerCase().includes(arg.toLowerCase()));
+
+		if (!member) {
+			message.guild.fetchMembers().then(() => {
+				member = message.guild.members.get((discordIDRegex.exec(arg) || [])[1])
+					|| message.guild.members.get(arg)
+					|| message.guild.members.find(member => member.displayName.toLowerCase().includes(arg.toLowerCase()));
+			});
+		}
+
+		return member;
 	}
 
 	static toEmoji(message, arg) {
