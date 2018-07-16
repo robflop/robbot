@@ -70,6 +70,7 @@ class CounterCommand extends Command {
 			if (args.secondarySelector === 'general') {
 				axios.get('https://megumin.love/counter?statistics').then(statistics => {
 					const embed = new RichEmbed();
+
 					embed.setAuthor('megumin.love Counter Statistics', 'https://megumin.love/images/favicons/favicon-32x32.png')
 						.setURL('https://megumin.love/')
 						.setColor((Math.random() * 10e4).toFixed(5))
@@ -77,7 +78,7 @@ class CounterCommand extends Command {
 						.addField('Today', formatNumber(statistics.data.daily), true)
 						.addField('This week', formatNumber(statistics.data.weekly), true)
 						.addField('This month', formatNumber(statistics.data.monthly), true)
-						.addBlankField(true)
+						.addField('This year', formatNumber(statistics.data.yearly), true)
 						.addField('Average/day', formatNumber(statistics.data.average), true);
 					return message.channel.send({ embed });
 				}).catch(err => {
