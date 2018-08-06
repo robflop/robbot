@@ -42,7 +42,7 @@ class CounterCommand extends Command {
 			}
 
 			if (args.secondarySelector === 'append' && config.owners.includes(message.author.id)) {
-				return axios.get('https://megumin.love/counter').then(counter => {
+				return axios.get('https://megumin.love/api/counter').then(counter => {
 					const newCounter = `${formatNumber(counter.data)} ${time} ${date}`;
 					history.push(newCounter);
 					logger.writeJSON(history, './data/counterHistory.json')
@@ -68,7 +68,7 @@ class CounterCommand extends Command {
 
 		if (args.primarySelector === 'statistics') {
 			if (args.secondarySelector === 'general') {
-				axios.get('https://megumin.love/counter?statistics').then(statistics => {
+				axios.get('https://megumin.love/api/counter?statistics').then(statistics => {
 					const embed = new RichEmbed();
 
 					embed.setAuthor('megumin.love Counter Statistics', 'https://megumin.love/images/favicons/favicon-32x32.png')
@@ -89,8 +89,8 @@ class CounterCommand extends Command {
 			}
 
 			if (args.secondarySelector === 'rankings') {
-				axios.get('https://megumin.love/counter?rankings').then(rankings => {
-					const parsedRanks = rankings.data.slice(0, 10);
+				axios.get('https://megumin.love/api/sounds').then(sounds => {
+					const parsedRanks = sounds.data.sort((a, b) => a.count - b.count).slice(0, 10);
 					const embed = new RichEmbed();
 					embed.setAuthor('megumin.love Soundboard Rankings', 'https://megumin.love/images/favicons/favicon-32x32.png')
 						.setURL('https://megumin.love/')
@@ -112,7 +112,7 @@ class CounterCommand extends Command {
 		}
 
 		if (args.primarySelector === 'general') {
-			axios.get('https://megumin.love/counter').then(counter => {
+			axios.get('https://megumin.love/api/counter').then(counter => {
 				const celebrations = counter.data % 100000 === 0 ? '🎉' : counter.data % 10000000 === 0 ? '🎊🎉' : '';
 				const formattedCounter = `${celebrations} **${formatNumber(counter.data)}** ${celebrations}`.trim();
 				return message.channel.send(`Current https://megumin.love count is: ${formattedCounter}`);
