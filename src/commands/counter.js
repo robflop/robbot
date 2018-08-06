@@ -43,7 +43,7 @@ class CounterCommand extends Command {
 
 			if (args.secondarySelector === 'append' && config.owners.includes(message.author.id)) {
 				return axios.get('https://megumin.love/api/counter').then(counter => {
-					const newCounter = `${formatNumber(counter.data)} ${time} ${date}`;
+					const newCounter = `${formatNumber(counter.data.counter)} ${time} ${date}`;
 					history.push(newCounter);
 					logger.writeJSON(history, './data/counterHistory.json')
 						.then(data => message.reply(`new entry successfully added: ${icb}${newCounter}${icb}`))
@@ -87,19 +87,19 @@ class CounterCommand extends Command {
 					logger.error(inspect(err));
 				});
 			}
+		}
 
-			if (args.secondarySelector === 'rankings') {
+		if (args.primarySelector === 'rankings') {
+			if (args.secondarySelector === 'general') {
 				axios.get('https://megumin.love/api/sounds').then(sounds => {
-					const parsedRanks = sounds.data.sort((a, b) => a.count - b.count).slice(0, 10);
+					const parsedRanks = sounds.data.sort((a, b) => b.count - a.count).slice(0, 12);
 					const embed = new RichEmbed();
 					embed.setAuthor('megumin.love Soundboard Rankings', 'https://megumin.love/images/favicons/favicon-32x32.png')
 						.setURL('https://megumin.love/')
 						.setColor((Math.random() * 10e4).toFixed(5));
 
 					for (const rank of parsedRanks) {
-						if (parsedRanks.indexOf(rank) + 1 === 10) embed.addBlankField(true); // centering of 10th rank
-						embed.addField(`#${parsedRanks.indexOf(rank) + 1}: ${rank.displayName}`, `${formatNumber(rank.count)} clicks`, true);
-						if (parsedRanks.indexOf(rank) + 1 === 10) embed.addBlankField(true); // centering of 10th rank
+						embed.addField(`#${parsedRanks.indexOf(rank) + 1}: ${rank.displayname}`, `${formatNumber(rank.count)} clicks`, true);
 					}
 
 					return message.channel.send({ embed });
@@ -113,8 +113,7 @@ class CounterCommand extends Command {
 
 		if (args.primarySelector === 'general') {
 			axios.get('https://megumin.love/api/counter').then(counter => {
-				const celebrations = counter.data % 100000 === 0 ? '🎉' : counter.data % 10000000 === 0 ? '🎊🎉' : '';
-				const formattedCounter = `${celebrations} **${formatNumber(counter.data)}** ${celebrations}`.trim();
+				const formattedCounter = `**${formatNumber(counter.data)}**`.trim();
 				return message.channel.send(`Current https://megumin.love count is: ${formattedCounter}`);
 			}).catch(err => {
 				const errorDetails = `${err.host ? err.host : ''} ${err.message ? err.message : ''}`.trim();
