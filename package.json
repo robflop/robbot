@@ -6,16 +6,16 @@
   "dependencies": {
     "axios": "^0.18.0",
     "chalk": "^2.4.1",
-    "discord.js": "^11.3.2",
+    "discord.js": "^11.4.2",
     "erlpack": "^0.1.2",
     "moment": "^2.22.2",
     "opusscript": "^0.0.6",
     "prism-media": "github:hydrabolt/prism-media",
-    "uws": "^10.148.1",
+    "uws": "10.148.1",
     "zlib-sync": "^0.1.4"
   },
   "devDependencies": {
-    "eslint": "^4.19.1"
+    "eslint": "^5.4.0"
   },
   "scripts": {
     "test": "eslint src"
