@@ -113,7 +113,7 @@ class CounterCommand extends Command {
 
 		if (args.primarySelector === 'general') {
 			axios.get('https://megumin.love/api/counter').then(counter => {
-				const formattedCounter = `**${formatNumber(counter.data)}**`.trim();
+				const formattedCounter = `**${formatNumber(counter.data.counter)}**`.trim();
 				return message.channel.send(`Current https://megumin.love count is: ${formattedCounter}`);
 			}).catch(err => {
 				const errorDetails = `${err.host ? err.host : ''} ${err.message ? err.message : ''}`.trim();
