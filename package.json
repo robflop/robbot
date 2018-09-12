@@ -1,6 +1,6 @@
 {
   "name": "robbot",
-  "version": "4.3.2",
+  "version": "4.3.3",
   "description": "Discord bot to along with the website megumin.love, built with discord.js",
   "main": "./src/robbot",
   "dependencies": {
