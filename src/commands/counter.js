@@ -68,7 +68,7 @@ class CounterCommand extends Command {
 
 		if (args.primarySelector === 'statistics') {
 			if (args.secondarySelector === 'general') {
-				axios.get('https://megumin.love/api/counter?statistics').then(statistics => {
+				axios.get('https://megumin.love/api/statistics/summary').then(statistics => {
 					const embed = new RichEmbed();
 
 					embed.setAuthor('megumin.love Counter Statistics', 'https://megumin.love/images/favicons/favicon-32x32.png')
