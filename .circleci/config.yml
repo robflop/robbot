@@ -1,0 +1,28 @@
+version: 2.1
+workflows:
+  version: 2.1
+  test:
+    jobs:
+      - node-lts
+      - node-current
+jobs:
+  node-lts: &node-template
+    docker:
+      - image: circleci/node:lts
+    working_directory: ~/src
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: npm run test
+  node-current:
+    <<: *node-template
+    docker:
+      - image: circleci/node:current
